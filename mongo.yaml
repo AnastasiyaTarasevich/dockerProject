@@ -7,6 +7,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
   mongo-express:
     image: mongo-express
     restart: always
@@ -20,3 +22,6 @@ services:
     image: my-app:latest #first of all create docker image from dockerfile
     ports:
       - 8080:8080
+volumes:
+  mongo-data:
+    driver: local
