@@ -3,7 +3,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,15 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
-@AllArgsConstructor
-
 public class UserController {
     private final ResourceLoader resourceLoader;
     private final UserService userService;
+
+    public UserController(@Qualifier("webApplicationContext") ResourceLoader resourceLoader, UserService userService) {
+        this.resourceLoader = resourceLoader;
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     public String hello() {
         return "my";

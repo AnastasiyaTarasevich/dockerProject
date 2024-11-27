@@ -3,15 +3,20 @@ package com.example.demo.service;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
-public class UserService {
-    private UserRepo userRepo;
 
+public class UserService {
+
+    private final UserRepo userRepo;
+    @Autowired
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
     public Optional<User> getUserByUserid(int userid) {
         return Optional.ofNullable(userRepo.findByUserId(userid));
     }
